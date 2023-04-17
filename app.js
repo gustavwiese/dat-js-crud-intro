@@ -114,7 +114,7 @@ async function deleteUser(id) {
 
 // ================== Events and Event Listeners ============ //
 document.querySelector("#form-create").addEventListener("submit", createUser);
-document.querySelector("#form-create").addEventListener("submit", createUser);
+document.querySelector("#form-update").addEventListener("submit", updateUser);
 
 function scrollToTop() {
     window.scrollTo({ top: 0, behavior: "smooth" });
