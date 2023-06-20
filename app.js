@@ -7,7 +7,7 @@ const headers = {
 let selectedUser;
 
 // ============ READ ============ //
-// Read (GET) all users from Firebase (Database) using REST API
+// Read (GET) all users from backend using REST API
 async function readUsers() {
     const response = await fetch(`${endpoint}/users`);
     const data = await response.json();
@@ -45,7 +45,7 @@ function displayUsers(list) {
 }
 
 // ============ CREATE ============ //
-// Create (POST) user to Firebase (Database) using REST API
+// Create (POST) user to backend using REST API
 async function createUser(event) {
     event.preventDefault();
     const name = event.target.name.value;
