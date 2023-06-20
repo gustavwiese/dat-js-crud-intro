@@ -1,17 +1,17 @@
 // ============ GLOBAL VARIABELS ============ //
-const endpoint =
-    "https://race-dat-v1-default-rtdb.europe-west1.firebasedatabase.app";
-// const endpoint =
-//     "https://race-dat-v2-default-rtdb.europe-west1.firebasedatabase.app";
+const endpoint = "https://node-express-rest-users.onrender.com";
 let selectedUser;
 
 // ============ READ ============ //
 // Read (GET) all users from Firebase (Database) using REST API
 async function readUsers() {
-    const response = await fetch(`${endpoint}/users.json`);
+    const headers = {
+        Accept: "*/*",
+        "Content-Type": "application/json"
+    };
+    const response = await fetch(`${endpoint}/users`, { headers: headers });
     const data = await response.json();
-    const users = Object.keys(data).map(key => ({ id: key, ...data[key] })); // from object to array
-    return users;
+    return data;
 }
 
 // Create HTML and display all users from given list
