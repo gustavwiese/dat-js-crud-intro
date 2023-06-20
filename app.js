@@ -1,15 +1,14 @@
 // ============ GLOBAL VARIABELS ============ //
 const endpoint = "https://node-express-rest-users.onrender.com";
+const headers = {
+    "Content-Type": "application/json"
+};
 let selectedUser;
 
 // ============ READ ============ //
 // Read (GET) all users from Firebase (Database) using REST API
 async function readUsers() {
-    const headers = {
-        Accept: "*/*",
-        "Content-Type": "application/json"
-    };
-    const response = await fetch(`${endpoint}/users`, { headers: headers });
+    const response = await fetch(`${endpoint}/users`);
     const data = await response.json();
     return data;
 }
@@ -55,7 +54,8 @@ async function createUser(event) {
     // create a new user
     const newUser = { name, title, mail, image };
     const userAsJson = JSON.stringify(newUser);
-    const response = await fetch(`${endpoint}/users.json`, {
+    const response = await fetch(`${endpoint}/users`, {
+        headers: headers,
         method: "POST",
         body: userAsJson
     });
@@ -89,7 +89,8 @@ async function updateUser(event) {
     // update user
     const userToUpdate = { name, title, mail, image };
     const userAsJson = JSON.stringify(userToUpdate);
-    const response = await fetch(`${endpoint}/users/${selectedUser.id}.json`, {
+    const response = await fetch(`${endpoint}/users/${selectedUser.id}`, {
+        headers: headers,
         method: "PUT",
         body: userAsJson
     });
@@ -103,7 +104,7 @@ async function updateUser(event) {
 
 // ================== DELETE ============ //
 async function deleteUser(id) {
-    const response = await fetch(`${endpoint}/users/${id}.json`, {
+    const response = await fetch(`${endpoint}/users/${id}`, {
         method: "DELETE"
     });
     if (response.ok) {
