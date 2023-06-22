@@ -1,11 +1,27 @@
 // ============ GLOBAL VARIABELS ============ //
-const endpoint =
-    "https://race-dat-v1-default-rtdb.europe-west1.firebasedatabase.app";
+const endpoint = "https://race-dat-v1-default-rtdb.europe-west1.firebasedatabase.app";
 // const endpoint =
 //     "https://race-dat-v2-default-rtdb.europe-west1.firebasedatabase.app";
 let selectedUser;
 
+// ============ INIT APP ============ //
+
+window.addEventListener("load", initApp);
+
+function initApp() {
+    updateUsersGrid(); // to initialize the grid view with users
+    // event listeners
+    document.querySelector("#form-create").addEventListener("submit", createUser);
+    document.querySelector("#form-update").addEventListener("submit", updateUser);
+}
+
 // ============ READ ============ //
+
+async function updateUsersGrid() {
+    const users = await readUsers();
+    displayUsers(users);
+}
+
 // Read (GET) all users from Firebase (Database) using REST API
 async function readUsers() {
     const response = await fetch(`${endpoint}/users.json`);
@@ -112,18 +128,8 @@ async function deleteUser(id) {
     }
 }
 
-// ================== Events and Event Listeners ============ //
-document.querySelector("#form-create").addEventListener("submit", createUser);
-document.querySelector("#form-update").addEventListener("submit", updateUser);
+// ================== Events ============ //
 
 function scrollToTop() {
     window.scrollTo({ top: 0, behavior: "smooth" });
 }
-
-async function updateUsersGrid() {
-    const users = await readUsers();
-    displayUsers(users);
-}
-
-// ============ Init CRUD App ============ //
-updateUsersGrid(); // to initialize the grid view with users
