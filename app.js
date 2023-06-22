@@ -1,12 +1,29 @@
 // ============ GLOBAL VARIABELS ============ //
-const endpoint = "https://node-express-rest-users.onrender.com";
-// const endpoint = "http://localhost:3333";
+// const endpoint = "https://node-express-rest-users.onrender.com";
+const endpoint = "http://localhost:3333";
 const headers = {
     "Content-Type": "application/json"
 };
 let selectedUser;
 
+// ============ INIT APP ============ //
+
+window.addEventListener("load", initApp);
+
+function initApp() {
+    updateUsersGrid(); // to initialize the grid view with users
+    // event listeners
+    document.querySelector("#form-create").addEventListener("submit", createUser);
+    document.querySelector("#form-update").addEventListener("submit", updateUser);
+}
+
 // ============ READ ============ //
+
+async function updateUsersGrid() {
+    const users = await readUsers();
+    displayUsers(users);
+}
+
 // Read (GET) all users from backend using REST API
 async function readUsers() {
     const response = await fetch(`${endpoint}/users`);
@@ -114,18 +131,8 @@ async function deleteUser(id) {
     }
 }
 
-// ================== Events and Event Listeners ============ //
-document.querySelector("#form-create").addEventListener("submit", createUser);
-document.querySelector("#form-update").addEventListener("submit", updateUser);
+// ================== Events ============ //
 
 function scrollToTop() {
     window.scrollTo({ top: 0, behavior: "smooth" });
 }
-
-async function updateUsersGrid() {
-    const users = await readUsers();
-    displayUsers(users);
-}
-
-// ============ Init CRUD App ============ //
-updateUsersGrid(); // to initialize the grid view with users
