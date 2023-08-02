@@ -1,6 +1,5 @@
 // ============ GLOBAL VARIABELS ============ //
-const endpoint = "https://node-express-rest-users.onrender.com";
-// const endpoint = "http://localhost:3333";
+const endpoint = "http://localhost:3333";
 const headers = {
     "Content-Type": "application/json"
 };
