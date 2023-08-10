@@ -1,5 +1,5 @@
 // ============ GLOBAL VARIABELS ============ //
-const endpoint = "http://localhost:3333";
+const endpoint = "https://node-express-rest-users.azurewebsites.net";
 const headers = {
     "Content-Type": "application/json"
 };
